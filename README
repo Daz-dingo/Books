@@ -1,0 +1,133 @@
+=================
+tex file template
+=================
+
+Please add the following magic comment at the top of each tex file
+
+% !TEX root = ../main.tex
+
+this will help latexmk find the root file in the multi file project.
+
+====================
+compile the tex file
+====================
+
+It is suggested that, use the latex workshop in Visual Studio Code. Since the ctex package is used here, latex must be replaced by xelatex. Therefore, one should change the setting for latexmk. Please add the following setting in the setting.json file:
+
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-xelatex",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        }
+    ],
+
+With the above setting, one could see the update of the whole pdf file on saving any subfile in the multi file project.
+
+==================
+working on outline
+==================
+
+The discussion of outline would be directly maintained in the tex file. There are several styles used for discussion. Since the structure of the book contains several levels, we use part, chapter, section and subsection to organize the whole book. The decleration of any part is put in the main tex file. Each sub folder contains each chapter and each sub file contains each section. This would easily help the resort between any sections. Therefore, any discussion about part would be put in the main tex file in the root directory. The discussion on chapters would be put in the main tex file in every sub folder. The discussion on the details of sections would be put in each sub tex file.
+
+The comments are used to maintain the discussion. Once decided, any comments on discussion could be erased in any condition.
+
+To put up a {part}, {chapter} or {section}, please use the following format
+
+% ====
+% part
+% ====
+% title: Title (could not be empty)
+% name: First Name, Last Name
+% date: MM/DD/YYYY
+% content: 
+% modified date: MM/DD/YYYY
+% name: First Name, Last Name
+% summary: 
+% =============
+% end of a part
+% =============
+
+% =======
+% chapter
+% =======
+% title: Title (could not be empty)
+% name: First Name, Last Name
+% date: MM/DD/YYYY
+% content: 
+% modified date: MM/DD/YYYY
+% name: First Name, Last Name
+% summary: 
+% ================
+% end of a chapter
+% ================
+
+% =======
+% section
+% =======
+% title: Title (could not be empty)
+% name: First Name, Last Name
+% date: MM/DD/YYYY
+% content: 
+% modified date: MM/DD/YYYY
+% name: First Name, Last Name
+% summary: 
+% ================
+% end of a section
+% ================
+
+The {issue} is used to start a discussion of any content. The format is as follows
+
+% =====
+% issue
+% =====
+% title: Title (could be empty)
+% name: First Name, Last Name
+% date: MM/DD/YYYY
+% content:
+% ===============
+% end of an issue
+% ===============
+
+Any further discussion under the same topic should be added into the same issue.
+
+The {TODO List} is used to set up a working scheduel. The format of the unfinished {TODO List} is as follows
+
+% =========
+% TODO List
+% =========
+% title: Title (coould be empty)
+% name: First Name, Last Name
+% date: MM/DD/YYYY
+% content:
+% ===================
+% end of an TODO List
+% ===================
+
+And this is the finished format
+
+% ================
+% TODO List (DONE)
+% ================
+% title: Title (coould be empty)
+% name: First Name, Last Name
+% date: MM/DD/YYYY
+% content:
+% ===================
+% end of an TODO List
+% ===================
+
+===========
+name a file
+===========
+
+Any sub folder should start with Ch and follow with the name of the chapter. Each sub folder would have a chapter.tex file. The main.tex in the root directory would include this file to build up the chapter. Each chapter file would contain several section files. Section file should name after Sc and the the name of the section.
